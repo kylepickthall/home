@@ -1,0 +1,98 @@
+* {
+	margin: 0px;
+	padding: 0px;
+  font-family: sans-serif;
+}
+
+section{
+  width: 100%;
+  text-align: left;
+  overflow-x: hidden;
+}
+
+#header {
+  height: 1000px;
+  display: block;
+  position: relative;
+}
+#header .background {
+  background-image: url('web-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: "";
+  opacity: .5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+#header .container {
+  font-size: 60px;
+  color: rgb(0, 5, 100);
+}
+
+#about {
+  height: auto;
+  background-color: lightgrey;
+  margin: auto;
+}
+#about .container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
+  padding: 15px;
+  text-align: center;
+}
+
+#pics{
+  background-color: lightgrey;
+  padding-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  height:250px;
+}
+#pics .container {
+  height: 100%;
+  width:auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#experience {
+  height: auto;
+  width: 100%;
+  background-color: white;
+  margin: auto;
+  text-align: center;
+}
+#experience .container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+#experience .container .job{
+  text-align: center;
+  padding: 10px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  list-style-position: inside;
+}
+
+#footer {
+  height: 20px;
+  padding-top: 5px;
+  background-color: darkgrey;
+  margin: auto;
+}
+#footer .container {
+  text-align: center;
+}
+#footer .container a {
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
