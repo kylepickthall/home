@@ -9,13 +9,24 @@ section{
   text-align: left;
   overflow-x: hidden;
 }
+section .header {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	height: 70px;
+	text-align: center;
+	line-height: 70px;
+	color: white;
+	background-color: rgb(0, 5, 60);
+	outline: 1px solid white;
+	outline-offset: -6px;
+}
 
-#header {
+#main {
   height: 1000px;
   display: block;
   position: relative;
 }
-#header .background {
+#main .background {
   background-image: url('web-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -28,7 +39,7 @@ section{
   position: absolute;
   z-index: -1;
 }
-#header .container {
+#main .container {
   font-size: 60px;
   color: rgb(0, 5, 100);
 }
@@ -49,8 +60,6 @@ section{
 #pics{
   background-color: lightgrey;
   padding-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
   height:250px;
 }
 #pics .container {
@@ -63,7 +72,7 @@ section{
 #experience {
   height: auto;
   width: 100%;
-  background-color: white;
+  background-color: lightgrey;
   margin: auto;
   text-align: center;
 }
@@ -82,10 +91,35 @@ section{
   list-style-position: inside;
 }
 
+#projects {
+	height: auto;
+  width: 100%;
+  background-color: lightgrey;
+  margin: auto;
+  text-align: center;
+}
+#projects .container {
+	padding: 5px;
+	height: auto;
+}
+#projects .container a {
+	display: inline-block;
+	padding: 3px;
+	height: 30px;
+	width: 150px;
+	margin-left: auto;
+  margin-right: auto;
+	font-size: 20px;
+	color: black;
+	background-color: darkgrey;
+	text-decoration: none;
+	border: 2px solid black;
+}
+
 #footer {
   height: 20px;
   padding-top: 5px;
-  background-color: darkgrey;
+  background-color: rgb(0, 5, 60);
   margin: auto;
 }
 #footer .container {
@@ -93,6 +127,6 @@ section{
 }
 #footer .container a {
   text-align: center;
-  text-decoration: none;
-  color: black;
+  text-decoration: bold;
+  color: white;
 }
