@@ -121,7 +121,7 @@ renderer.domElement.addEventListener('click', onMouseClick, false);
 var dots = [];
 var dotsArray = [];
 // Fetch data.csv from the grav folder
-fetch('grav/data.csv')
+fetch('data.csv')
   .then(response => response.text())
   .then(csvData => {
     const rows = csvData.split('\n');
