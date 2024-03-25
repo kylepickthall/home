@@ -118,41 +118,37 @@ function onMouseClick(event) {
 renderer.domElement.addEventListener('click', onMouseClick, false);
 
 // DOTS FROM CSV - COLUMN ORDER IS XYZ
-var dots = []
+var dots = [];
 var dotsArray = [];
-document.getElementById('csvFileInput').addEventListener('change', function(event) {
-	const file = event.target.files[0];
-	const reader = new FileReader();
-	const dotRadius = .5;
+// Fetch data.csv from the grav folder
+fetch('grav/data.csv')
+  .then(response => response.text())
+  .then(csvData => {
+    const rows = csvData.split('\n');
+    rows.shift(); // Remove header if present
+    rows.forEach(function(row) {
+      row = row.trim(); // Remove leading/trailing whitespace
+      if (row) {
+        var columns = row.split(',');
+        dotsArray.push(columns);
+      }
+    });
 
-	reader.onload = function(event) {
-		const csvData = event.target.result;
+    const dotRadius = .5;
+    const dotGeometry = new THREE.SphereGeometry(dotRadius, 16, 16);
+    const dotMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-		const rows = csvData.split('\n');
-		rows.shift()
-		rows.forEach(function(row) {
-			row = row.substring(0, row.length - 1);
-			var columns = row.split(',');
-			dotsArray.push(columns);
-		});
-		dotsArray.pop();
-		
-		//ADDING IN THE DOTS
-		const dotGeometry = new THREE.SphereGeometry(dotRadius, 16, 16);
-		const dotMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-		dotsArray.forEach(function(dotData) {
-			var dot = new THREE.Mesh(dotGeometry, dotMaterial);
-			var velo = new THREE.Vector3(0, 0, 0);
-			dot.position.x = parseFloat(dotData[0]*10)
-			dot.position.y = parseFloat(dotData[1]*10)
-			dot.position.z = parseFloat(dotData[2]*10)
-			dot.velo = velo;
-			scene.add(dot);
-			dots.push(dot);
-		});
-	};
-	reader.readAsText(file);
-});
+    dotsArray.forEach(function(dotData) {
+      var dot = new THREE.Mesh(dotGeometry, dotMaterial);
+      var velo = new THREE.Vector3(0, 0, 0);
+      dot.position.x = parseFloat(dotData[0] * 10);
+      dot.position.y = parseFloat(dotData[1] * 10);
+      dot.position.z = parseFloat(dotData[2] * 10);
+      dot.velo = velo;
+      scene.add(dot);
+      dots.push(dot);
+    });
+  })
 
 //GRAVITY
 function gravity() {
