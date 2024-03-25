@@ -150,7 +150,6 @@ fetch('data.csv')
       dots.push(dot);
     });
   })
-  .catch(error => console.error('Error fetching data.csv:', error));
 
 //GRAVITY
 function gravity() {
