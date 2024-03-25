@@ -133,7 +133,8 @@ fetch('grav/data.csv')
         dotsArray.push(columns);
       }
     });
-
+    console.log(1)
+  
     const dotRadius = .5;
     const dotGeometry = new THREE.SphereGeometry(dotRadius, 16, 16);
     const dotMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
@@ -149,6 +150,7 @@ fetch('grav/data.csv')
       dots.push(dot);
     });
   })
+  .catch(error => console.error('Error fetching data.csv:', error));
 
 //GRAVITY
 function gravity() {
