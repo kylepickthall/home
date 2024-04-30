@@ -27,7 +27,7 @@ section .header {
   position: relative;
 }
 #main .background {
-  background-image: url('web-background.jpg');
+  background-image: url('sitec2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   content: "";
