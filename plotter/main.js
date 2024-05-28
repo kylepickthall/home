@@ -128,6 +128,7 @@ fetch('Pivoted.csv')
 	//ADDING IN THE DOTS
 	const dotGeometry = new THREE.SphereGeometry(dotRadius, 16, 16);
 	const dotMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color(255, 255, 255) });
+	const dotRadius = 3;
 	dotsArray.forEach(function(dotData) {
 		if (dotData[0] == "" || dotData[1] == "" || dotData[2] == "") {
 			return;
