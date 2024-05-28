@@ -148,7 +148,7 @@ fetch('Pivoted.csv')
 		scene.add(dot);
 		dots.push(dot);
 	});
-};
+});
 
 //ADDS EVENT HANDLER TO RESET VIEW + FOCUS ON ADDED DOTS
 document.getElementById("btnResetView").addEventListener("click", function() {
