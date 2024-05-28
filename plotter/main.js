@@ -110,49 +110,45 @@ var dots = [];
 var dotsArray = [];
 var maxVals = { x: 0, y: 0, z: 0 };
 var minVals = { x: 999999999, y: 999999999, z: 999999999 };
-document.getElementById('csvFileInput').addEventListener('change', function(event) {
-	const file = event.target.files[0];
-	const reader = new FileReader();
-	const dotRadius = 3;
-
-	reader.onload = function(event) {
-		const csvData = event.target.result;
-
-		const rows = csvData.split('\n');
-		rows.shift()
-		rows.forEach(function(row) {
-			row = row.substring(0, row.length - 1);
-			var columns = row.split(',');
-			dotsArray.push(columns);
-		});
-		dotsArray.pop();
+// Fetch data.csv from the grav folder
+fetch('Pivoted.csv')
+  .then(response => response.text())
+  .then(csvData => {
+    const rows = csvData.split('\n');
+    rows.shift(); // Remove header if present
+    rows.forEach(function(row) {
+      row = row.trim(); // Remove leading/trailing whitespace
+      if (row) {
+        var columns = row.split(',');
+        dotsArray.push(columns);
+      }
+    });
+    console.log(1)
 		
-		//ADDING IN THE DOTS
-		const dotGeometry = new THREE.SphereGeometry(dotRadius, 16, 16);
-		const dotMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color(255, 255, 255) });
-		dotsArray.forEach(function(dotData) {
-			if (dotData[0] == "" || dotData[1] == "" || dotData[2] == "") {
-				return;
-			}
-			var dot = new THREE.Mesh(dotGeometry, dotMaterial.clone());
-			var velo = new THREE.Vector3(0, 0, 0);
-			dot.position.x = parseFloat(dotData[0])
-			dot.position.y = parseFloat(dotData[1])
-			dot.position.z = parseFloat(dotData[2])
-			if (dot.position.x > maxVals.x) {maxVals.x = dot.position.x};
-			if (dot.position.y > maxVals.y) {maxVals.y = dot.position.y};
-			if (dot.position.z > maxVals.z) {maxVals.z = dot.position.z};
-			if (dot.position.x < minVals.x) {minVals.x = dot.position.x};
-			if (dot.position.y < minVals.y) {minVals.y = dot.position.y};
-			if (dot.position.z < minVals.z) {minVals.z = dot.position.z};
-			
-			dot.velo = velo;
-			scene.add(dot);
-			dots.push(dot);
-		});
-	};
-	reader.readAsText(file);
-});
+	//ADDING IN THE DOTS
+	const dotGeometry = new THREE.SphereGeometry(dotRadius, 16, 16);
+	const dotMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color(255, 255, 255) });
+	dotsArray.forEach(function(dotData) {
+		if (dotData[0] == "" || dotData[1] == "" || dotData[2] == "") {
+			return;
+		}
+		var dot = new THREE.Mesh(dotGeometry, dotMaterial.clone());
+		var velo = new THREE.Vector3(0, 0, 0);
+		dot.position.x = parseFloat(dotData[0])
+		dot.position.y = parseFloat(dotData[1])
+		dot.position.z = parseFloat(dotData[2])
+		if (dot.position.x > maxVals.x) {maxVals.x = dot.position.x};
+		if (dot.position.y > maxVals.y) {maxVals.y = dot.position.y};
+		if (dot.position.z > maxVals.z) {maxVals.z = dot.position.z};
+		if (dot.position.x < minVals.x) {minVals.x = dot.position.x};
+		if (dot.position.y < minVals.y) {minVals.y = dot.position.y};
+		if (dot.position.z < minVals.z) {minVals.z = dot.position.z};
+		
+		dot.velo = velo;
+		scene.add(dot);
+		dots.push(dot);
+	});
+};
 
 //ADDS EVENT HANDLER TO RESET VIEW + FOCUS ON ADDED DOTS
 document.getElementById("btnResetView").addEventListener("click", function() {
