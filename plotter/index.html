@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xyz Plotter</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+		#divControls {
+			
+		}
+		.divControl {
+			margin-bottom: 15px;
+		}
+		.divControl button {
+			background-color: lightgray;
+		}
+    </style>
+</head>
+<body>
+	<div id="divControls" style="position: absolute; top: 0; right: 0; width: 200px">
+		<div class="divControl">
+			<p style="width: 200px; color: gray; font-family: Arial">
+				Mousewheel to zoom, mousewheel + shift to dolly, middle mouse to pan, middle mouse + shift to rotate.
+				Press "Choose File" to pick some xyz data in csv form. Columns must be ordered x-y-z, with 1 row of headers.
+			</p>
+		</div>
+		<div  class="divControl">
+			<input type="file" id="csvFileInput" accept=".csv" style="width: 90px; display: block;">
+		</div>
+		<div  class="divControl">
+			<button style="display: block; margin-top: 5px; background: tan" onclick="loadData(event, 'Vancouver.csv')">Vancouver</button>
+			<button style="display: block; margin-top: 5px; background: tan" onclick="loadData(event, 'Seattle.csv')">Seattle</button>
+		</div>
+		<div  class="divControl">
+			<button id="btnToggleFormatting" style="display: block; margin-top: 5px;">Toggle Conditional Formatting</button>
+		</div>
+		<div  class="divControl">
+			<button id="btnToggleSectioning" style="display: block; margin-top: 5px;">Toggle Sectioning</button>
+			<input type="range" min="0" max="100" value="50" id="formattingSlider" style="display: block; margin-top: 5px;">
+		</div>
+		<div  class="divControl">
+			<button id="btnResetView" style="display: block; margin-top: 5px;">Reset View</button>
+		</div>
+	</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+	<script src="shaders.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
