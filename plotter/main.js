@@ -105,6 +105,7 @@ function onMouseWheel(e) {
 		e.preventDefault();
 		const diff = new THREE.Vector3().copy(camera.position).sub(controls.target).multiplyScalar(0.001*e.deltaY);
 		camera.position.add(diff);
+		diff.multiplyScalar(3/2);		//Why does this work? No one knows.
 		camera.lookAt(controls.target.add(diff));
 	}
 }
@@ -154,7 +155,6 @@ function addDataFromRows(rows) {
 		var columns = row.split(',');
 		if (columns[0] !== "" && columns[1] !== "" && columns[2] !== "") {
 			var dotData = columns.map(Number);
-			dots.push(dotData);
 			dotPositions.push(dotData[0], dotData[1], dotData[2]);
 			dotSizes.push(dotRadius);
 			if (dotData[0] > maxVals.x) { maxVals.x = dotData[0]; }
@@ -165,12 +165,16 @@ function addDataFromRows(rows) {
 			if (dotData[2] < minVals.z) { minVals.z = dotData[2]; }
 		}
 	});
+	
+	var isFlat = calculateIsFlat(dotPositions);
 
 	console.log("Dot Positions:", dotPositions);
 	console.log("Dot Sizes:", dotSizes);
+	console.log("Is Flat?:", isFlat);
 
 	dotsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(dotPositions, 3));
 	dotsGeometry.setAttribute('size', new THREE.Float32BufferAttribute(dotSizes, 1));
+	dotsGeometry.setAttribute('isFlat', new THREE.Float32BufferAttribute(isFlat, 1));
 
 	// Update shader uniforms
 	shaderMaterial.uniforms.uMinVals.value.set(minVals.x, minVals.y, minVals.z);
@@ -182,11 +186,10 @@ function addDataFromRows(rows) {
 	
 	dotsGeometry.attributes.position.needsUpdate = true;
 	dotsGeometry.attributes.size.needsUpdate = true;
+	dotsGeometry.attributes.isFlat.needsUpdate = true;
 	
 	resetView();
 };
-
-
 
 // SHADER MATERIAL
 var shaderMaterial = new THREE.ShaderMaterial({
@@ -205,13 +208,54 @@ var shaderMaterial = new THREE.ShaderMaterial({
 // DOTS MESH
 var dotsMesh = new THREE.Points(dotsGeometry, shaderMaterial);
 
+//CALCULATES IF A SECTION IS FLAT
+function calculateIsFlat(dotPositions) {
+	const isFlatAccuracy = 0.5;
+	const isFlat = [];
+	const cellSize = 40;
+	const cells = new Map();
+
+	//puts dots in a grid
+	for (var i = 0; i < dotPositions.length; i += 3) {
+		const xPos = Math.floor(dotPositions[i] / cellSize);
+		const yPos = Math.floor(dotPositions[i + 1] / cellSize);
+		const key = xPos + "," + yPos;
+		if (!cells.has(key)) cells.set(key, [dotPositions[i], dotPositions[i+1], dotPositions[i+2]]);
+	}
+
+	for (let i = 0; i < dotPositions.length; i += 3) {
+		const targetXPos = Math.floor(dotPositions[i] / cellSize);
+		const targetYPos = Math.floor(dotPositions[i+1] / cellSize);
+		const targetZ = dotPositions[i+2];
+		const targetKey = targetXPos + "," + targetYPos;
+		let flat = true;
+
+		//neighboring cells
+		for (let dx = -1; dx <= 1; dx++) {
+			for (let dy = -1; dy <= 1; dy++) {
+				const neighbourXPos = targetXPos + dx;
+				const neighbourYPos = targetYPos + dy;
+				const neighborKey = neighbourXPos + ',' + neighbourYPos;
+				if (!cells.has(neighborKey)) continue;
+				const neighbourZ = cells.get(neighborKey)[2];
+				if (Math.abs(targetZ - neighbourZ) > isFlatAccuracy) {
+					flat = false;
+					break;
+				}
+			}
+		}
+		isFlat.push(flat);
+	}
+	return isFlat;
+}
+
 // ADDS EVENT HANDLER TO RESET VIEW + FOCUS ON ADDED DOTS
 document.getElementById("btnResetView").addEventListener("click", function() {
     resetView();
 });
 
 function resetView() {
-    if (dots.length === 0) { return; }
+    if (dotPositions.length === 0) { return; }
 
     var centerPos = new THREE.Vector3((maxVals.x + minVals.x) / 2, (maxVals.y + minVals.y) / 2, (maxVals.z + minVals.z) / 2);
     var diffMax = Math.max(maxVals.x - minVals.x, maxVals.y - minVals.y, maxVals.z - minVals.z);
