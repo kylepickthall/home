@@ -100,6 +100,18 @@ function onMouseClick(event) {
 }
 renderer.domElement.addEventListener('click', onMouseClick, false);
 
+//MOUSEWHEEL EVENT HANDLER - DOLLIES THE CAMERA ON SHIFT + MOUSEWHEEL
+function onMouseWheel(e) {
+	if (e.shiftKey) {
+		e.preventDefault();
+		const diff = new THREE.Vector3().copy(camera.position).sub(controls.target).multiplyScalar(0.001*e.deltaY);
+		camera.position.add(diff);
+		diff.multiplyScalar(3/2);		//Why does this work? No one knows.
+		camera.lookAt(controls.target.add(diff));
+	}
+}
+renderer.domElement.addEventListener('wheel', onMouseWheel, { passive: false });
+
 //FPS COUNTER
 var fpsCounter = document.getElementById("fpsCounter");
 var frames_ = 0;
