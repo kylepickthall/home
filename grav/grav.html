@@ -12,12 +12,27 @@
         canvas {
             display: block;
         }
+	#divControls {
+		
+	}
+	.divControl {
+		margin-bottom: 15px;
+	}
+	.divControl button {
+		background-color: lightgray;
+	}
     </style>
 </head>
 <body>
-	<div id="divControls">
-		<input type="file" id="csvFileInput" accept=".csv">
-		<p id="fpsCounter" style="float: right; padding: 0; margin: 0;"></p>
+	<div id="divControls" style="position: absolute; top: 0; right: 0; width: 200px">
+		<div class="divControl">
+			<p style="width: 200px; color: gray; font-family: Arial">
+				Mousewheel to zoom, mousewheel + shift to dolly, middle mouse to pan, middle mouse + shift to orbit.
+			</p>
+		</div>
+		<div class="divControl">
+			<p id="fpsCounter" style="padding: 0; margin: 0; color: gray; font-family: Arial""></p>
+		</div>
 	</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
