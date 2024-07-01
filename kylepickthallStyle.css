@@ -129,4 +129,5 @@ section .header {
   text-align: center;
   text-decoration: bold;
   color: white;
+  padding-right: 5px;
 }
