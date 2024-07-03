@@ -123,6 +123,9 @@ section .header {
 	left: 5px;
 	float: left;
 }
+#projects .container .workexample a {
+	float: left;
+}
 	
 #footer {
   height: 20px;
