@@ -119,10 +119,8 @@ section .header {
     	align-items: center;
     	gap: 1rem;
 }
-#projects .container .workexample a {
-	
-}
 #projects .container .workexample p {
+	left: 5px;
 	float: left;
 }
 	
