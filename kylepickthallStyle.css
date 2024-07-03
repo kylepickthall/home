@@ -116,7 +116,15 @@ section .header {
 	border: 2px solid black;
 }
 #projects .container .workexample {
-	
+	display: flex;
+    	align-items: center;
+    	gap: 1rem;
+}
+#projects .container .workExample a {
+    	flex-shrink: 0;
+}
+#projects .container .workExample p {
+    	margin: 0;
 }
 
 #footer {
