@@ -101,9 +101,6 @@ section .header {
 #projects .container {
 	padding: 5px;
 	height: auto;
-	display: flex;
-    	flex-direction: column;
-    	gap: 1rem; /* Space between work examples */
 }
 #projects .container a {
 	display: inline-block;
@@ -119,17 +116,16 @@ section .header {
 	border: 2px solid black;
 }
 #projects .container .workexample {
-	display: flex;
     	align-items: center;
     	gap: 1rem;
 }
-#projects .container .workExample a {
-    	flex-shrink: 0;
+#projects .container .workexample a {
+	
 }
-#projects .container .workExample p {
-    	margin: 0;
+#projects .container .workexample p {
+	float: left;
 }
-
+	
 #footer {
   height: 20px;
   padding-top: 5px;
