@@ -115,6 +115,9 @@ section .header {
 	text-decoration: none;
 	border: 2px solid black;
 }
+#projects .container .workexample {
+	
+}
 
 #footer {
   height: 20px;
