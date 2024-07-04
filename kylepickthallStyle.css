@@ -96,14 +96,19 @@ section .header {
   	width: 100%;
   	background-color: lightgrey;
   	margin: auto;
-  	text-align: center;
 }
 #projects .container {
 	padding: 5px;
 	height: auto;
 }
-#projects .container a {
-	display: inline-block;
+#projects .container .workexample {
+	display: inline-flex;
+	width: 90%;
+}
+#projects .container .workexample p {
+
+}
+#projects .container .workexample a {
 	padding: 3px;
 	height: 28px;
 	width: auto;
@@ -114,16 +119,6 @@ section .header {
 	background-color: darkgrey;
 	text-decoration: none;
 	border: 2px solid black;
-}
-#projects .container .workexample {
-	display: inline-flex;
-	width: 90%;
-}
-#projects .container .workexample p {
-
-}
-#projects .container .workexample a {
-
 }
 	
 #footer {
