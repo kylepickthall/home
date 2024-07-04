@@ -101,6 +101,15 @@ section .header {
 	padding: 5px;
 	height: auto;
 }
+#projects .container .workexample {
+	height: auto;
+	display: inline-flex;
+	width: 90%;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
 #projects .container a {
 	padding: 0px;
 	height: auto;
@@ -113,23 +122,7 @@ section .header {
 	text-decoration: none;
 	border: 1px solid black;
 }
-#projects .container .workexample {
-	height: auto;
-	display: inline-flex;
-	width: 90%;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	padding-left: 10px;
-	padding-right: 10px;
-	height: 40px;
-}
-#projects .container .workexample p {
 
-}
-#projects .container .workexample a {
-
-}
-	
 #footer {
   height: 20px;
   padding-top: 5px;
