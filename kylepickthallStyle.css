@@ -102,12 +102,12 @@ section .header {
 	height: auto;
 }
 #projects .container a {
-	padding: 2px;
+	padding: 0px;
 	height: auto;
 	width: auto;
 	margin-left: auto;
   	margin-right: auto;
-	font-size: 18px;
+	font-size: 16px;
 	color: black;
 	background-color: darkgrey;
 	text-decoration: none;
@@ -121,6 +121,7 @@ section .header {
 	padding-bottom: 2px;
 	padding-left: 10px;
 	padding-right: 10px;
+	height: 40px;
 }
 #projects .container .workexample p {
 
