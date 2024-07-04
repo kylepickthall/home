@@ -98,7 +98,7 @@ section .header {
   	margin: auto;
 }
 #projects .container {
-
+	margin-top: 15px;
 }
 #projects .container .workExample {
 	margin-top: 2px;
@@ -109,8 +109,8 @@ section .header {
 #projects .container a {
 	padding-top: 1px;
 	padding-bottom: 1px;
-	padding-left: 12px;
-	padding-right: 12px;
+	padding-left: 24px;
+	padding-right: 24px;
 	height: auto;
 	width: auto;
 	margin-left: auto;
