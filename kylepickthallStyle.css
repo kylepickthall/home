@@ -102,14 +102,15 @@ section .header {
 }
 #projects .container .workexample {
 	display: inline-flex;
+	margin-bottom: 5px;
 }
 #projects .container a {
-	padding: 0px;
+	padding: 2px;
 	height: auto;
 	width: auto;
 	margin-left: auto;
   	margin-right: auto;
-	font-size: 16px;
+	font-size: 18px;
 	color: black;
 	background-color: darkgrey;
 	text-decoration: none;
