@@ -102,6 +102,7 @@ section .header {
 }
 #projects .container .workExample {
 	display: inline-flex;
+	float: left;
 	margin-bottom: 5px;
 	width: 90%;
 }
