@@ -101,13 +101,15 @@ section .header {
 
 }
 #projects .container .workExample {
-	display: inline-flex;
-	float: left;
-	margin-bottom: 5px;
-	width: 90%;
+	margin-top: 2px;
+	margin-bottom: 6px;
+	width: 100%;
 }
 #projects .container a {
-	padding: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
 	height: auto;
 	width: auto;
 	margin-left: auto;
