@@ -101,14 +101,7 @@ section .header {
 	padding: 5px;
 	height: auto;
 }
-#projects .container .workexample {
-	display: inline-flex;
-	width: 90%;
-}
-#projects .container .workexample p {
-
-}
-#projects .container .workexample a {
+#projects .container a {
 	padding: 3px;
 	height: 28px;
 	width: auto;
@@ -119,6 +112,16 @@ section .header {
 	background-color: darkgrey;
 	text-decoration: none;
 	border: 2px solid black;
+}
+#projects .container .workexample {
+	display: inline-flex;
+	width: 90%;
+}
+#projects .container .workexample p {
+
+}
+#projects .container .workexample a {
+
 }
 	
 #footer {
