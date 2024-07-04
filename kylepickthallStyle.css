@@ -121,7 +121,6 @@ section .header {
 	width: 90%;
 }
 #projects .container .workexample p {
-	left: 5px;
 	float: left;
 }
 #projects .container .workexample a {
