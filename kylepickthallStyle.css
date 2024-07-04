@@ -117,7 +117,10 @@ section .header {
 	height: auto;
 	display: inline-flex;
 	width: 90%;
-	padding: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 #projects .container .workexample p {
 
