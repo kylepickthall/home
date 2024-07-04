@@ -103,6 +103,7 @@ section .header {
 #projects .container .workexample {
 	display: inline-flex;
 	margin-bottom: 5px;
+	width: 90%;
 }
 #projects .container a {
 	padding: 2px;
