@@ -116,7 +116,9 @@ section .header {
 	border: 2px solid black;
 }
 #projects .container .workexample {
-
+	display: block;
+	float: left;
+	width: 90%;
 }
 #projects .container .workexample p {
 	left: 5px;
