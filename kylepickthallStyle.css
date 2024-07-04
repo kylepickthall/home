@@ -100,7 +100,7 @@ section .header {
 #projects .container {
 
 }
-#projects .workexample {
+#projects .container .workExample {
 	display: inline-flex;
 	margin-bottom: 5px;
 	width: 90%;
