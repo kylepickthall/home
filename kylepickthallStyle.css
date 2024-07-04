@@ -116,15 +116,14 @@ section .header {
 	border: 2px solid black;
 }
 #projects .container .workexample {
-	display: block;
-	float: left;
+	display: inline-flex;
 	width: 90%;
 }
 #projects .container .workexample p {
-	float: left;
+
 }
 #projects .container .workexample a {
-	float: left;
+
 }
 	
 #footer {
