@@ -179,6 +179,7 @@ function createDefaultData() {
 			dotArr[i][j] = {
 				pos: {x: i, y: j, z: 0},
 				velo: {x: 0, y: 0, z: 0},
+				dye: 0,
 				s: 1,
 				pressure: 0,
 				divergence: 0
@@ -196,7 +197,7 @@ function createDefaultData() {
 				dotArr[i][j].s = 0;
 			}
 			if (i == 1 && j < 70 && j > 30 && !(j % 3)) {
-				dotArr[i][j].pos.z = 2;
+				dotArr[i][j].dye = 2;
 			}
 			
 			dotSizes.push(dotRadius);
@@ -219,6 +220,7 @@ function updateRender() {
 	
 	var dotPositions = [];
 	var dotS = [];
+	var dotDye = [];
 	
 	for (var i = 0; i < dotArr.length; i++) {
 		for (var j = 0; j < dotArr[0].length; j++) {
@@ -227,10 +229,13 @@ function updateRender() {
 			dotPositions.push(dotArr[i][j].pos.z);
 			
 			dotS.push(dotArr[i][j].s);
+			
+			dotDye.push(dotArr[i][j].dye);
 		}
 	}
 	dotsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(dotPositions, 3));
 	dotsGeometry.setAttribute('s', new THREE.Float32BufferAttribute(dotS, 1));
+	dotsGeometry.setAttribute('dye', new THREE.Float32BufferAttribute(dotDye, 1));
 }
 
 // SHADER MATERIAL

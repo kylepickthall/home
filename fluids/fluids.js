@@ -141,8 +141,8 @@ function advectDye() {
 			var t1 = 1 - t0;
 			
 			//new amount of dye to be in the cell after advection. still needs diffusion as below
-			newDye[i][j] = s1 * (t1 * dotArr[i0][j0].pos.z + t0 * dotArr[i0][j1].pos.z) +
-						   s0 * (t1 * dotArr[i1][j0].pos.z + t0 * dotArr[i1][j1].pos.z);
+			newDye[i][j] = s1 * (t1 * dotArr[i0][j0].dye + t0 * dotArr[i0][j1].dye) +
+						   s0 * (t1 * dotArr[i1][j0].dye + t0 * dotArr[i1][j1].dye);
         }
     }
     
@@ -155,7 +155,7 @@ function advectDye() {
 			var dye = newDye[i][j];
 			var deltaDye = newDye[i-1][j] + newDye[i+1][j] +
 						   newDye[i][j-1] + newDye[i][j+1] - 4 * dye;
-			dotArr[i][j].pos.z = dye + deltaDye * diffusion * dt;
+			dotArr[i][j].dye = dye + deltaDye * diffusion * dt;
         }
     }
 
@@ -163,7 +163,7 @@ function advectDye() {
 	totalDye = 0;
     for (var i = 1; i < dotArr.length - 1; i++) {
         for (var j = 1; j < dotArr[0].length - 1; j++) {
-            totalDye += dotArr[i][j].pos.z;
+            totalDye += dotArr[i][j].dye;
         }
     }
     //console.log(totalDye);
