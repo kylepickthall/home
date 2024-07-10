@@ -167,11 +167,18 @@ function loadData(event, fileName) {
 //ADDS SOME DEFAULT DATA
 var dotsGeometry = new THREE.BufferGeometry();
 var dotArr = [];
+var dotSizes = [];
 var dotRadius = 2;
-var rowNum = 200;
-var colNum = 100;
-function createDefaultData() {
-	var dotSizes = [];
+var rowNum = 300;
+var colNum = 300;
+
+//rectangle
+function createDefaultRectangle() {
+	rowNum = 240;
+	colNum = 100;
+	
+	dotArr = [];
+	dotSizes = [];
 	
 	for (let i = 0; i < rowNum; i++) {
 		dotArr[i] = [];
@@ -187,17 +194,150 @@ function createDefaultData() {
 			
 			if (i == 1) {
 				dotArr[i][j].s = 0;
-				dotArr[i][j].velo.x = 5;
+				dotArr[i][j].velo.x = 3;
 			}
 			if (i == 2) {
 				dotArr[i][j].velo.x = 5;
 			}
-			if (i < 80 && i > 50 && j < 60 && j > 40) {
+			//box
+			if (i < 50 && i > 20 && j < 65 && j > 60) {
 				dotArr[i][j].velo.x = 0;
 				dotArr[i][j].s = 0;
 			}
 			if (i == 1 && j < 70 && j > 30 && !(j % 3)) {
 				dotArr[i][j].dye = 2;
+			}
+			
+			dotSizes.push(dotRadius);
+		}
+	}
+	
+	if (!scene.children.includes(dotsMesh)) {
+		scene.add(dotsMesh);
+	}
+	dotsGeometry.setAttribute('size', new THREE.Float32BufferAttribute(dotSizes, 1));
+	updateRender();
+	resetView();
+}
+
+//circle
+function createDefaultCircle() {
+	rowNum = 240;
+	colNum = 100;
+	
+	dotArr = [];
+	dotSizes = [];
+
+	for (let i = 0; i < rowNum; i++) {
+		dotArr[i] = [];
+		for (let j = 0; j < colNum; j++) {
+			dotArr[i][j] = {
+				pos: {x: i, y: j, z: 0},
+				velo: {x: 0, y: 0, z: 0},
+				dye: 0,
+				s: 1,
+				pressure: 0,
+				divergence: 0
+			};
+			
+			if (i == 1) {
+				dotArr[i][j].s = 0;
+				dotArr[i][j].velo.x = 3;
+			}
+			if (i == 2) {
+				dotArr[i][j].velo.x = 3;
+			}
+
+			//circle1
+			var distSquared = (i - 25) * (i - 25) + (j - 60) * (j - 60);
+			if (distSquared < 25) {
+				dotArr[i][j].velo.x = 0;
+				dotArr[i][j].s = 0;
+			}
+			//circle2
+			var distSquared = (i - 50) * (i - 50) + (j - 50) * (j - 50);
+			if (distSquared < 25) {
+				dotArr[i][j].velo.x = 0;
+				dotArr[i][j].s = 0;
+			}
+			//circle3
+			var distSquared = (i - 10) * (i - 10) + (j - 90) * (j - 90);
+			if (distSquared < 25) {
+				dotArr[i][j].velo.x = 0;
+				dotArr[i][j].s = 0;
+			}
+			
+			if (i == 1 && j < 70 && j > 30 && !(j % 3)) {
+				dotArr[i][j].dye = 2;
+			}
+			
+			dotSizes.push(dotRadius);
+		}
+	}
+	
+	if (!scene.children.includes(dotsMesh)) {
+		scene.add(dotsMesh);
+	}
+	dotsGeometry.setAttribute('size', new THREE.Float32BufferAttribute(dotSizes, 1));
+	updateRender();
+	resetView();
+}
+
+
+//contained box w/ some outflows
+function createDefaultBox() {
+	rowNum = 220;
+	colNum = 180;
+	
+	dotArr = [];
+	dotSizes = [];
+	
+	
+	for (let i = 0; i < rowNum; i++) {
+		dotArr[i] = [];
+		for (let j = 0; j < colNum; j++) {
+			dotArr[i][j] = {
+				pos: {x: i, y: j, z: 0},
+				velo: {x: 0, y: 0, z: 0},
+				dye: 0,
+				s: 1,
+				pressure: 0,
+				divergence: 0
+			};
+			
+			//boundary walls
+			if ((i == 1 && j < 101) || (i == 199 && j < 101) || j == 1 || j == 100) {
+				dotArr[i][j].s = 0;
+				
+			}
+			//outflow
+			if (i == 1 && j > 80 && j < 99) {
+				dotArr[i][j].velo.x = 8;
+				dotArr[i][j].dye = 0.8;
+			}
+			//outflow
+			if (i == 2 && j > 80 && j < 99) {
+				dotArr[i][j].velo.x = 8;
+			}
+			//fish entrance
+			if (j == 100 && i < 190 && i > 91) {
+				dotArr[i][j].s = 1;
+			}
+			//loop back to pump station
+			if (i == 199 && j > 2 && j < 20) {
+				dotArr[i][j].s = 1;
+			}
+			//near section of wall
+			if (i > 87 && j > 90 && j < 101 & i < 106) {
+				dotArr[i][j].s = 0;
+			}
+			//middle section of wall
+			if (i > 140 && j > 90 && j < 101 & i < 150) {
+				dotArr[i][j].s = 0;
+			}
+			//middle section of wall
+			if (i > 182 && j > 90 && j < 101 & i < 199) {
+				dotArr[i][j].s = 0;
 			}
 			
 			dotSizes.push(dotRadius);
@@ -271,7 +411,7 @@ function resetView() {
 }
 
 // ANIMATION LOOP
-createDefaultData();		//automatically makes some default data upon open
+createDefaultRectangle();		//automatically makes some default data upon open
 var animate = function () {
     requestAnimationFrame(animate);
 	fluidSim();

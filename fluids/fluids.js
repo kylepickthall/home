@@ -1,9 +1,9 @@
 //constants
-var diffusion = 0.2;	//how quickly dye naturally diffuses
-var viscosity = 0.0;	//how easily velocity is transferred
+var diffusion = 0.3;	//how quickly dye naturally diffuses
+var viscosity = 0.3;	//how easily velocity is transferred
 var dt = 0.1;			//time step
 var totalDye = 0;
-var maxK = 15;
+var maxK = 12;
 
 //Simple fluid sim
 //fixed
@@ -61,7 +61,7 @@ function updateVelocity() {
 				
 				var sTotal = sx0 + sy0 + sx1 + sy1;
 				
-				var divergence = 1.5 * (dotArr[i+1][j].velo.x - dotArr[i][j].velo.x + dotArr[i][j+1].velo.y - dotArr[i][j].velo.y);
+				var divergence = 1.9 * (dotArr[i+1][j].velo.x - dotArr[i][j].velo.x + dotArr[i][j+1].velo.y - dotArr[i][j].velo.y);
 				
 				//updates velocities
 				dotArr[i][j].velo.x = dotArr[i][j].velo.x + divergence * sx0 / sTotal;
@@ -99,8 +99,10 @@ function advectVelocity() {
 			var t1 = 1 - t0;
 			
 			//sets the velocities to that of the particle
-			dotArr[i][j].velo.x = dotArr[i0][j0].velo.x * s0 + dotArr[i1][j1].velo.x * s1;
-			dotArr[i][j].velo.y = dotArr[i0][j0].velo.y * t0 + dotArr[i1][j1].velo.y * t1;
+			dotArr[i][j].velo.x = s1 * (t1 * dotArr[i0][j0].velo.x + t0 * dotArr[i0][j1].velo.x) +
+                                  s0 * (t1 * dotArr[i1][j0].velo.x + t0 * dotArr[i1][j1].velo.x);
+            dotArr[i][j].velo.y = s1 * (t1 * dotArr[i0][j0].velo.y + t0 * dotArr[i0][j1].velo.y) +
+                                  s0 * (t1 * dotArr[i1][j0].velo.y + t0 * dotArr[i1][j1].velo.y);
         }
     }
 }
